@@ -1,25 +1,47 @@
-import logo from './logo.svg';
+import Transition from "./Transition";
+import ComingSoon from "./ComingSoon";
+import TextRainingEffect from "./textrainingeffects/TextRainingEffect";
+import WatermarksEffect from "./watermarks/WatermarksEffect";
+import VerticalSlider from "./verticalslider/VerticalSliderEffect";
 import './App.css';
 
+
 function App() {
+
+  const renderVideo = () => {
+    return (
+      <video
+      loop={true} 
+      muted={true}
+      autoPlay={true}>
+      <source 
+        src="https://res.cloudinary.com/www-c-t-l-k-com/video/upload/v1623450039/paxpana/Cloud_-_48503_1.mp4" 
+        type="video/mp4"
+      />
+    </video>
+    )
+  }
+
+  const renderTransition = () => {
+    return (
+      <Transition />
+    )
+  };
+
+  const comingSoon = () => {
+    return (
+      <ComingSoon />
+    )
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {renderTransition()}
+      {comingSoon()}
+      {renderVideo()}
     </div>
   );
 }
 
 export default App;
+

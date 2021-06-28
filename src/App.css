@@ -1,38 +1,44 @@
-.App {
-  text-align: center;
+@font-face {
+  font-family: ps;
+  src: url("fonts/ps/ps.ttf") format("truetype");
+}
+@font-face {
+  font-family: rock-salt;
+  src: url("fonts/rock-salt/rock-salt.ttf") format("truetype");
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+  overflow: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.vertical_slider_img_container img{
+  width: 104vw;
+  display: block;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+video{
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  z-index: -1;
 }
 
-.App-link {
-  color: #61dafb;
+.img_drops span{
+  font-size: 11px;
+  padding: 0.3vw;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.coming_soon{
+  font-size: 1vw;
+  font-family: rock-salt;
+  color: aliceblue;
+  -webkit-text-stroke: 1px black;
+  letter-spacing: 19px;
+  background-color: black;
+  width: fit-content;
+  bottom: 0;
+  position: fixed;
+  margin: 2vw;
+  padding: 1vw;
+  border-radius: 11px;
 }
