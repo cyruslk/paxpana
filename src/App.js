@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useMailChimp } from 'react-use-mailchimp-signup';
+import MailchimpSubscribe from "react-mailchimp-subscribe"
 import {useMediaQuery, useMediaQueries} from '@react-hook/media-query'
 import useSound from 'use-sound';
 import submission from './assets/submission.mp3';
 import click from './assets/click.mp3';
 
 import './App.css';
+
+
+const url = "//xxxx.us13.list-manage.com/subscribe/post?u=zefzefzef&id=fnfgn";
 
 
 let img = [
@@ -15,28 +18,21 @@ let img = [
   "https://res.cloudinary.com/www-c-t-l-k-com/image/upload/v1626123418/paxpana/coming_soon/bath.jpg",
 ];
 
-
 let randomImg = [...img].sort(() => Math.random() - 0.5);
 
 function App() {
-
-  const { 
-    subscribe
-  } = useMailChimp({
-    action: `https://<YOUR-USER>.us18.list-manage.com/subscribe/post?u=XXXXXX&amp;id=XXXXXX`,
-  });
 
   const [imgArray, setImgArray] = useState([]);   
   const [count, setCount] = useState(0);
   const [inputs, setInputs] = useState({});
 
-  // sounds hooks;
   const [playSubmission] = useSound(submission);
   const [playClick] = useSound(click);
 
   useEffect(() => {
     setImgArray(randomImg);
   }, []);
+
 
   useEffect(() => {
     playClick();
@@ -47,7 +43,6 @@ function App() {
     }
   }, [count, img.length]);
 
-
   const handleInputChange = (event) => {
     event.persist();
     setInputs((inputs) => ({
@@ -55,25 +50,15 @@ function App() {
       [event.target.name]: event.target.value,
     }));
   };
-
-  const handleSubmit = (event) => {
-    if (event) {
-      event.preventDefault();
-    }
-    if (inputs) {
-      playSubmission(); 
-      subscribe(inputs);
-    }
-  };
-
+ 
   const handleResetImages = () => {
     setImgArray(img);
     setCount(0);
   }
 
   let style = {
-    backgroundImage: "url('https://res.cloudinary.com/www-c-t-l-k-com/image/upload/v1626123418/paxpana/coming_soon/bath.jpg')"
-  }
+    backgroundImage: `url(${imgArray[count]})`
+  };
 
   return (
     <main>
@@ -89,15 +74,8 @@ function App() {
         <section className="coming_soon second">
             <h3>thank you!</h3>
             <div className="mailchimp_input">
-              <form onSubmit={handleSubmit}>
-                <input 
-                  type="email" 
-                  name="email" 
-                  id="mchimpEmail"
-                  placeholder="email address" 
-                  onChange={handleInputChange} 
-                />
-                </form>
+             <MailchimpSubscribe 
+              url={url}/>
             </div>
         </section>
 

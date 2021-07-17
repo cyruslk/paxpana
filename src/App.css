@@ -39,6 +39,10 @@ h1:hover{
   transition: 0.5s;
 }
 
+button{
+  display: none;
+}
+
 h2{
   font-family: freepixel;
   font-size: 3.1vw;
@@ -140,3 +144,47 @@ input{
   background-position: center; 
   z-index: -1;
 }
+
+
+@media only screen and (max-width: 600px) {
+
+  h1{
+    letter-spacing: 0;
+    font-size: 30vw;
+  }
+
+  h2{
+    letter-spacing: 0;
+    font-size: 10vw;
+  }
+
+  .first{
+    position: fixed;
+    top: 0;
+    text-align: center;
+    left: 20vw
+  }
+
+  .second{
+    left: 5vw;
+  }
+
+  input{
+    width: 85vw;
+  }
+
+  h3{
+    font-size: 10vw;
+  }
+
+  input::placeholder,
+  input{
+    font-size: 5vw;
+    letter-spacing: 2px;
+  }
+
+  .refresh{
+    margin: 10px;
+  }
+
+};
