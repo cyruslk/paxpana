@@ -99,6 +99,15 @@ input{
   outline: none;
 }
 
+.mailchimp_input *{
+  font-family: freepixel;
+  color: white;
+}
+
+label{
+  display: none;
+}
+
 #layer{
   position: fixed;
   left: 0;
