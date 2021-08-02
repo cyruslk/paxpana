@@ -1,29 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { useMailChimp } from 'react-use-mailchimp-signup';
-import {useMediaQuery, useMediaQueries} from '@react-hook/media-query'
 import useSound from 'use-sound';
 import submission from './assets/submission.mp3';
 import click from './assets/click.mp3';
-
 import './App.css';
 
-let img = [
-  "https://res.cloudinary.com/www-c-t-l-k-com/image/upload/v1626123426/paxpana/coming_soon/room.jpg",
-  "https://res.cloudinary.com/www-c-t-l-k-com/image/upload/v1626123422/paxpana/coming_soon/dog.jpg",
-  "https://res.cloudinary.com/www-c-t-l-k-com/image/upload/v1626123418/paxpana/coming_soon/balcony.jpg",
-  "https://res.cloudinary.com/www-c-t-l-k-com/image/upload/v1626123418/paxpana/coming_soon/bath.jpg",
+
+const mailchimpURL = "https://gmail.us6.list-manage.com/subscribe/post?u=529cf141a9d5c3aec045e67da&amp;id=c2ad5d33b2";
+
+let imgDesktop = [
+  "https://res.cloudinary.com/www-c-t-l-k-com/image/upload/v1627128951/paxpana/coming_soon/desktop_img_1.jpg",
+  "https://res.cloudinary.com/www-c-t-l-k-com/image/upload/v1627128947/paxpana/coming_soon/desktop_img_2.jpg",
+  "https://res.cloudinary.com/www-c-t-l-k-com/image/upload/v1627128951/paxpana/coming_soon/desktop_img_3.jpg",
+  "https://res.cloudinary.com/www-c-t-l-k-com/image/upload/v1627128951/paxpana/coming_soon/desktop_img_4.jpg"
 ];
 
-const url = "https://gmail.us6.list-manage.com/subscribe/post?u=529cf141a9d5c3aec045e67da&amp;id=c2ad5d33b2";
-
-// let randomImg = [...img].sort(() => Math.random() - 0.5);
+let imgMobile = [
+  "https://res.cloudinary.com/www-c-t-l-k-com/image/upload/v1627137179/paxpana/coming_soon/mobile_img_1.jpg",
+  "https://res.cloudinary.com/www-c-t-l-k-com/image/upload/v1627137180/paxpana/coming_soon/mobile_img_2.jpg",
+  "https://res.cloudinary.com/www-c-t-l-k-com/image/upload/v1627137179/paxpana/coming_soon/mobile_img_3.jpg",
+  "https://res.cloudinary.com/www-c-t-l-k-com/image/upload/v1627164713/paxpana/coming_soon/mobile_img_4.jpg"
+]
 
 function App() {
 
-  const { error, loading, status, subscribe, message } = useMailChimp(
-    {action: url}
-  );
 
+
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+    height: undefined,
+  });
 
   const [imgArray, setImgArray] = useState([]);   
   const [countImg, setCountImg] = useState(0);
@@ -34,22 +40,48 @@ function App() {
   const [playSubmission] = useSound(submission);
   const [playClick] = useSound(click);
 
-  // useEffect(() => {
-  //   setImgArray(randomImg);
-  // }, []);
+
+  const { error, loading, status, subscribe, message } = useMailChimp(
+    {action: mailchimpURL}
+  );
+
 
   useEffect(() => {
-    setImgArray(img);
+
+    // let lockOrientation = window.screen.lockOrientation || window.screen.mozLockOrientation || window.screen.msLockOrientation || window.screen.orientation.lock;
+
+    // lockOrientation('portrait');
+
+    setImgArray(imgDesktop);
+    function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
 
+
   useEffect(() => {
-   if(countImg === img.length){
-      setCountImg(0);
+
+    if(windowSize.width < 600) {
+      setImgArray(imgMobile);
     }else{
-      return null;
+      setImgArray(imgDesktop);
     }
-  }, [countImg, img.length]);
+
+    if(countImg === imgArray.length){
+        setCountImg(0);
+      }else{
+        return null;
+      }
+  }, [countImg, imgArray.length, windowSize]);
+
+  
 
   const returnPlaceholderName = () => {
     if(isPlaceholder){
@@ -78,8 +110,6 @@ const handlePlaceholderNameChange = () => {
     if (inputs) {
       playSubmission();
       subscribe(inputs);
-
-      // 
       if(error){
         setIsSubscribed("Oops, something went wrong")
       }
@@ -93,11 +123,6 @@ const handlePlaceholderNameChange = () => {
     }
   };
  
-  // const handleResetImages = () => {
-  //   setImgArray(img);
-  //   setCountImg(0);
-  // };
-
   const handlePlayClick = () => {
     playClick();
     setCountImg(countImg + 1);
@@ -109,6 +134,14 @@ const handlePlaceholderNameChange = () => {
     }else{
       return null;
     }
+  };
+
+  const renderButtonMobile = () => {
+    return (
+      <button onClick={handleSubmit}>
+        SUBMIT
+      </button>
+    )
   }
 
   let style = {
@@ -117,13 +150,11 @@ const handlePlaceholderNameChange = () => {
 
   return (
     <main>
-
         <img 
             id="layer"
             alt="refresh"
             src="https://res.cloudinary.com/www-c-t-l-k-com/image/upload/v1626190843/paxpana/coming_soon/ComingSoon.Desktop.jpg" 
         />
-
         <section className="coming_soon first">
             <h1>pax pana</h1>
             <h2>coming soon</h2>
@@ -134,9 +165,9 @@ const handlePlaceholderNameChange = () => {
             <div className="mailchimp_input">
              <section>
               <form 
-                  id="emailSubscribeForm"
-                  onSubmit={handleSubmit}
-              >
+                id="emailSubscribeForm"
+                onSubmit={handleSubmit}>
+
                 <input
                   onClick={handlePlaceholderNameChange}
                   onBlur={handlePlaceholderNameChange}
@@ -147,6 +178,9 @@ const handlePlaceholderNameChange = () => {
                   onChange={handleInputChange} 
                 />
               </form>
+
+              {renderButtonMobile()}
+
             </section>
             </div>
 
@@ -167,6 +201,7 @@ const handlePlaceholderNameChange = () => {
     </main>
   );
 }
+
 
 export default App;
 

@@ -22,15 +22,6 @@ body{
   cursor: url(https://cur.cursors-4u.net/cursors/cur-11/cur1054.cur), auto !important;
 }
 
-*{
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
 h1{
   font-family: thiamine;
   font-size: 12.5vw;
@@ -49,6 +40,10 @@ h1:hover{
 }
 
 button{
+  background-color: gray;
+  color: white;
+  width: 100%;
+  margin-left: -1.2vw;
   display: none;
 }
 
@@ -75,8 +70,9 @@ h3{
   color: white;
   text-shadow: 1px 1px 2px black;
   margin: 0;
-  letter-spacing: -1.9px;
-  margin-bottom: 3vw;
+  letter-spacing: -2.9px;
+  margin-bottom: 0.5vw;
+  margin-left: 0vw;
 }
 
 img{
@@ -94,7 +90,7 @@ input::placeholder{
 input{
   padding: 9px;
   width: 38vw;
-  height: 5vh;
+  height: 3vh;
   background-color: transparent;
   border: 1px solid white;
   box-shadow: 1px 1px 2px black;
@@ -105,6 +101,7 @@ input{
   text-shadow: 1px 1px 2px black;
   margin: 0;
   letter-spacing: -1.9px;
+  margin-left: -14px;
   outline: none;
 }
 
@@ -134,7 +131,12 @@ label{
   right: 0;
   top: auto;
   filter: drop-shadow(2px 4px 6px black) opacity(2);
-  padding: 1vw;
+  padding: 39px;
+}
+
+form{
+  margin-left: -1.2vw;
+  z-index: 1000;
 }
 
 .first{
@@ -147,19 +149,18 @@ label{
 .second{
   text-align: center;
   position: fixed;
-  bottom: 18vh;
-  left: 30vw;
+  bottom: 31vh;
+  left: 31vw;
 }
 
 .img_section{
   position: fixed;
   left: 0;
   top: 0;
-  height: 100vh;
   width: 100vw;
-  background-repeat: no-repeat;
+  height: 100vh;
   background-attachment: fixed;
-  background-position: center; 
+  background-size: cover;
   z-index: -1;
 }
 
@@ -167,42 +168,77 @@ label{
 @media only screen and (max-width: 600px) {
 
   h1{
-    letter-spacing: 0;
+    letter-spacing: 5px;
     font-size: 30vw;
   }
 
-  h2{
+  h1:hover{
+    transform: none;
+  }
+
+  h2, h3{
     letter-spacing: 0;
-    font-size: 10vw;
+    font-size: 8vw;
   }
 
   .first{
     position: fixed;
     top: 0;
     text-align: center;
-    left: 20vw
+    left: 23vw
   }
 
   .second{
-    left: 5vw;
+    left: 9vw;
+    bottom: 28vw;
   }
 
   input{
     width: 85vw;
+    color: white;
   }
 
-  h3{
-    font-size: 10vw;
+  button{
+    display: block;
+    background-color: white;
+    color: black !important;
+    margin-top: 10vw;
   }
 
   input::placeholder,
+  button,
   input{
     font-size: 5vw;
     letter-spacing: 2px;
+    color: white;
   }
 
   .refresh{
-    margin: 10px;
+    z-index: 100;
   }
-
 };
+
+@media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
+  html {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 100vh;
+    overflow-x: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+}
+
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) { 
+
+    .second{
+      display: none;
+    }
+
+  };  
+
