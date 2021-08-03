@@ -81,20 +81,25 @@ const handlePlaceholderNameChange = () => {
     }));
   };
 
+  const validateEmail = (email) => {
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
+
   const handleSubmit = (event) => {
+
+    let mailChimpInput = document.getElementById("mchimpEmail").value;
+    let isEmail = validateEmail(mailChimpInput);
+    if(!isEmail){
+      return;
+    }
+
     setIsShowSubscription(true)
-    
     if (event) {
       event.preventDefault();
     }
     if (inputs) {
       subscribe(inputs);
-      if(error){
-        setIsSubscribed("Oops, something went wrong")
-      }
-      if(loading){
-        setIsSubscribed("Loading")
-      }
       if(!error){
         setIsSubscribed("thank you")
       }
@@ -102,9 +107,6 @@ const handlePlaceholderNameChange = () => {
     }
   };
 
-  const handleSubmitArrow = () => {
-    // alert("fvd")
-  }
  
   const handlePlayClick = () => {
     playClick();
@@ -123,6 +125,9 @@ const handlePlaceholderNameChange = () => {
 
   return (
     <main>
+        <img 
+          style={{display: "none"}}
+          src="https://res.cloudinary.com/www-c-t-l-k-com/image/upload/v1628022774/ComingSoon.Desktop.Updated_sn1kwt.jpg" />
         <div 
           onClick={handlePlayClick}
           className="video-container">
@@ -139,6 +144,8 @@ const handlePlaceholderNameChange = () => {
           <section className="coming_soon inner_container">
               <h1>pax pana</h1>
               <h2>coming soon</h2>
+
+              <section className="mailchimp_section">
               <h3 id="subscription_message">
                   {returnSubscriptionMessage()}
               </h3>
@@ -147,6 +154,7 @@ const handlePlaceholderNameChange = () => {
                   <form 
                     id="emailSubscribeForm"
                     onSubmit={handleSubmit}>
+
                     <input
                       onClick={handlePlaceholderNameChange}
                       onBlur={handlePlaceholderNameChange}
@@ -156,8 +164,9 @@ const handlePlaceholderNameChange = () => {
                       id="mchimpEmail" 
                       onChange={handleInputChange} 
                     />
+
                       <div>
-                      <span 
+                      <span
                         className="load-more"
                         onClick={handleSubmit}>
                         </span>
@@ -165,6 +174,8 @@ const handlePlaceholderNameChange = () => {
                   </form>
                 </section>
               </div>
+              </section>
+
           </section> 
         </section>
     </main>

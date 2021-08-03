@@ -31,16 +31,16 @@ body{
 }
 
 .video-container video {
-  width: 100vw;
-  height: 100vh;
   position: absolute;
+  height: 100vh;
+  width: 100vw;
   object-fit: cover;
   z-index: 0;
 }
 
 h1{
   font-family: thiamine;
-  font-size: 9.5vw;
+  font-size: 8vw;
   letter-spacing: 8px;
   font-weight: 100;
   color: white;
@@ -64,19 +64,23 @@ h2{
   font-weight: 100;
   color: white;
   margin: 0;
-  margin-top: 2.5vw;
+  margin-top: 3.7vw;
+}
+
+.mailchimp_section{
+  margin-top: 9.2vw;
 }
 
 
 h3{
   font-family: freepixel;
-  font-size: 2.5vw;
+  font-size: 2vw;
   font-weight: 100;
   color: white;
   text-shadow: 1px 1px 2px black;
   margin: 0;
   letter-spacing: -2.9px;
-  margin-bottom: 0.5vw;
+  margin-bottom: 1.5vw;
 }
 
 img{
@@ -97,7 +101,7 @@ input{
   height: 3vh;
   background-color: transparent;
   font-family: freepixel;
-  font-size: 2.5vw;
+  font-size: 2vw;
   font-weight: 100;
   box-shadow: none;
   outline: none;
@@ -144,11 +148,15 @@ label{
   padding: 39px;
 }
 
+input:-webkit-autofill {
+  background-color: transparent;
+}
+
 form{
   box-shadow: 1px 1px 2px black;
   z-index: 1000;
   position: relative;
-  width: 38vw;
+  width: 29vw;
   border: 1px solid white;
   display: flex;
   align-items: center;
@@ -164,7 +172,7 @@ form div{
 
 .inner_container{
   position: fixed;
-  top: 0;
+  top: 11vh;
   text-align: center;
   display: flex;
   align-items: center;
@@ -186,49 +194,6 @@ form div{
   background-size: cover;
   z-index: -1;
 }
-
-
-@media only screen and (max-width: 600px) {
-
-  h1{
-    letter-spacing: 5px;
-    font-size: 30vw;
-  }
-
-
-  h2, h3{
-    letter-spacing: 0;
-    font-size: 8vw;
-  }
-
-  .inner_container{
-    position: fixed;
-    top: 0;
-    text-align: center;
-    left: 23vw
-  }
-
-
-  button{
-    display: block;
-    background-color: white;
-    color: black !important;
-    margin-top: 10vw;
-  }
-
-  input::placeholder,
-  button,
-  input{
-    font-size: 5vw;
-    letter-spacing: 2px;
-    color: white;
-  }
-
-  .refresh{
-    z-index: 100;
-  }
-};
-
 
 .load-more {
 	position: absolute;
@@ -291,15 +256,72 @@ form div{
 
 
 
+@media only screen and (max-width: 600px) {
+
+  
+  h1{
+    letter-spacing: 5px;
+    font-size: 20vw;
+  }
+
+  .mailchimp_section{
+    margin-top: 15.2vw;
+  }
+
+  .video-container video {
+    position: absolute;
+    height: 100vh;
+    width: unset;
+    object-fit: contain;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .load-more{
+    transform: scale(0.7);
+  }
+
+
+  form{
+    width: 79vw;
+  }
+
+
+  h2, h3{
+    letter-spacing: 0;
+    font-size: 5vw;
+  }
+
+  .inner_container{
+    text-align: center;
+  }
+
+
+  button{
+    display: block;
+    background-color: white;
+    color: black !important;
+    margin-top: 10vw;
+  }
+
+  input::placeholder,
+  button,
+  input{
+    font-size: 5vw;
+    letter-spacing: 2px;
+    color: white;
+  }
+
+  .refresh{
+    z-index: 100;
+  }
+};
+
+
+
 @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
   html {
     transform: rotate(-90deg);
-    transform-origin: left top;
-    width: 100vh;
-    overflow-x: hidden;
-    position: absolute;
-    top: 100%;
-    left: 0;
   }
 }
 
@@ -308,7 +330,9 @@ form div{
   and (max-device-width: 667px) 
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: landscape) { 
-
+    html {
+      transform: rotate(-90deg);
+    }
 
   };  
 

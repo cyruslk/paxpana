@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0">
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
@@ -42,12 +42,28 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
   </script>
   <script>
+
+    // perform the regezx here;
+
+    function validateEmail(email) {
+      const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    }
+
       var page = 1,
       moving = false;
         var animationIteration = "animationiteration webkitAnimationIteration mozAnimationIteration oAnimationIteration oanimationiteration",
           transitionEnd      = "transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd";
 
         $(".load-more").on("click", function() {
+
+          let mailChimpInput = document.getElementById("mchimpEmail").value;
+
+          let isEmail = validateEmail(mailChimpInput);
+          if(!isEmail){
+            return;
+          }
+
           if ( moving == false ) {
             moving = true;
             $(".load-more").addClass("active");
