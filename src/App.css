@@ -1,11 +1,3 @@
-@font-face {
-  font-family: ps;
-  src: url("fonts/ps/ps.ttf") format("truetype");
-}
-@font-face {
-  font-family: rock-salt;
-  src: url("fonts/rock-salt/rock-salt.ttf") format("truetype");
-}
 
 @font-face {
   font-family: thiamine;
@@ -25,13 +17,13 @@ body{
 
 
 .video-container {
-  height: 100vw;
-  width: 100vh;
+  height: 100vh;
+  width: 100vw;
   position: relative;
 }
 
 .video-container video {
-  position: absolute;
+  position: fixed;
   height: 100vh;
   width: 100vw;
   object-fit: cover;
@@ -41,7 +33,7 @@ body{
 h1{
   font-family: thiamine;
   font-size: 8vw;
-  letter-spacing: 8px;
+  letter-spacing: 5px;
   font-weight: 100;
   color: white;
   text-shadow: 1px 1px 2px black;
@@ -58,35 +50,37 @@ button{
 
 h2{
   font-family: freepixel;
-  text-shadow: 1px 1px 2px black;
+  text-shadow: 1px 1px 2px #000;
   font-size: 2.1vw;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   font-weight: 100;
-  color: white;
+  color: #fff;
   margin: 0;
-  margin-top: 3.7vw;
+  margin-top: 46px;
+  margin-left: -2px;
 }
 
 .mailchimp_section{
-  margin-top: 9.2vw;
+  margin-top: 145px;
 }
 
 
 h3{
   font-family: freepixel;
-  font-size: 2vw;
+  font-size: 1.8vw;
   font-weight: 100;
   color: white;
   text-shadow: 1px 1px 2px black;
   margin: 0;
-  letter-spacing: -2.9px;
   margin-bottom: 1.5vw;
 }
 
 img{
+  display: none;
   position: absolute;
   top: 0;
-  z-index: -1;
+  opacity: 0.3;
+  z-index: 1;
   width: 100vw;
   filter: contrast(1.2);
 }
@@ -101,14 +95,13 @@ input{
   height: 3vh;
   background-color: transparent;
   font-family: freepixel;
-  font-size: 2vw;
+  font-size: 1.8vw;
   font-weight: 100;
   box-shadow: none;
-  outline: none;
-  color: white;
-  text-shadow: 1px 1px 2px black;
+  color: #fff;
+  text-shadow: 1px 1px 2px #000;
   margin: 0;
-  letter-spacing: -1.9px;
+  letter-spacing: 0px;
   outline: none;
   border: none;
 }
@@ -202,6 +195,7 @@ form div{
   width: 40px; height: 40px;
   top: 50%; left: 50%;
   margin: -20px 0 0 -20px;
+  transform: scale(0.7);
 }
 	.load-more:before,
 	.load-more:after {
@@ -236,18 +230,6 @@ form div{
 	}
 
 
-		@keyframes rotate {
-			to {
-				transform: translate(-50%, -50%) rotate(405deg);
-			}
-		}
-		@keyframes rotate2 {
-			to {
-				transform: translate(-50%, -50%) rotate(-315deg);
-			}
-		}
-
-
 	.load-more.disabled:before,
 	.load-more.disabled:after {
     margin-top: 0;
@@ -257,24 +239,25 @@ form div{
 
 
 @media only screen and (max-width: 600px) {
-
   
   h1{
     letter-spacing: 5px;
     font-size: 20vw;
+    margin-right: 5px;
   }
 
   .mailchimp_section{
-    margin-top: 15.2vw;
+    margin-top: 30.2vw;
   }
 
   .video-container video {
-    position: absolute;
-    height: 100vh;
+    position: fixed;
+    height: 70vh;
     width: unset;
     object-fit: contain;
     z-index: 0;
     overflow: hidden;
+    transform: scale(2);
   }
 
   .load-more{
@@ -288,12 +271,15 @@ form div{
 
 
   h2, h3{
-    letter-spacing: 0;
     font-size: 5vw;
+    margin-top: 30px;
+    letter-spacing: 1px;
+    margin-right: 5px;
   }
 
   .inner_container{
     text-align: center;
+    top: 8vh;
   }
 
 
@@ -308,7 +294,7 @@ form div{
   button,
   input{
     font-size: 5vw;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     color: white;
   }
 
@@ -320,9 +306,41 @@ form div{
 
 
 @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
-  html {
-    transform: rotate(-90deg);
+
+  body{
+    overflow: hidden;
   }
+
+  h2, h3{
+    margin-top: 0;
+    letter-spacing: 1px;
+  }
+
+  .video-container video {
+    position: absolute;
+    height: 100vh;
+    width: unset;
+    object-fit: contain;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  form{
+    width: 40vw;
+  }
+
+  form div{
+    right: 5px;
+  }
+
+  .load-more{
+    transform: scale(0.5);
+  }
+
+  .mailchimp_section{
+    margin-top: 0.2vw;
+  }
+
 }
 
 @media only screen 
@@ -330,9 +348,50 @@ form div{
   and (max-device-width: 667px) 
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: landscape) { 
-    html {
-      transform: rotate(-90deg);
+
+    body{
+      overflow: hidden;
+      width: 100vw;
+      background-color: black;
+    }
+
+    form{
+      width: 40vw;
+    }
+
+    h2, h3{
+      margin-top: 5px;
+    }
+
+    .video-container video {
+      position: absolute;
+      height: 100vh;
+      width: 100vw;
+      object-fit: contain;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .load-more{
+      transform: scale(0.5);
+    }
+
+    .mailchimp_section{
+      margin-top: 0.2vw;
     }
 
   };  
+
+
+  @keyframes rotate {
+    to {
+      transform: translate(-50%, -50%) rotate(405deg);
+    }
+  }
+  @keyframes rotate2 {
+    to {
+      transform: translate(-50%, -50%) rotate(-315deg);
+    }
+  }
+
 

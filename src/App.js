@@ -52,13 +52,13 @@ function App() {
     }
   }, [windowSize]);
 
-
+ 
   useEffect(() => {
     if(isShowSubscription){      
-      setTimeout(() => {
-        setIsShowSubscription(false)
-      }, 2000)
-    };
+        setTimeout(() => {
+          setIsShowSubscription(false);
+        }, 2000);
+    }
   }, [isShowSubscription])
 
   const returnPlaceholderName = () => {
@@ -87,14 +87,17 @@ const handlePlaceholderNameChange = () => {
   }
 
   const handleSubmit = (event) => {
-
+    
     let mailChimpInput = document.getElementById("mchimpEmail").value;
     let isEmail = validateEmail(mailChimpInput);
     if(!isEmail){
       return;
     }
 
-    setIsShowSubscription(true)
+    setTimeout(() => {
+      setIsShowSubscription(true)
+    }, 2000);
+
     if (event) {
       event.preventDefault();
     }
@@ -106,18 +109,16 @@ const handlePlaceholderNameChange = () => {
       document.getElementById("emailSubscribeForm").reset();
     }
   };
-
  
   const handlePlayClick = () => {
     playClick();
   };
 
-  const returnSubscriptionMessage = () => {
-
+  const returnSubscriptionMessageStyle = () => {
     if(isShowSubscription){
-      return "thank you!"
+      return "visible"
     }else {
-      return null;
+      return "hidden"
     };
 
   };
@@ -126,35 +127,43 @@ const handlePlaceholderNameChange = () => {
   return (
     <main>
         <img 
-          style={{display: "none"}}
           src="https://res.cloudinary.com/www-c-t-l-k-com/image/upload/v1628022774/ComingSoon.Desktop.Updated_sn1kwt.jpg" />
         <div 
           onClick={handlePlayClick}
           className="video-container">
             <video 
               autoPlay 
+              playsInline
               muted 
               loop>
                 <source 
-                  src="https://res.cloudinary.com/www-c-t-l-k-com/video/upload/v1627912642/paxpana/background-video.mp4" 
+                  src="https://res.cloudinary.com/www-c-t-l-k-com/video/upload/v1628772026/paxpana/background-video.mp4" 
                   type="video/mp4"/>
             </video>
         </div>
-        <section className="outer_container">
+        <section 
+        onClick={handlePlayClick}
+        className="outer_container">
           <section className="coming_soon inner_container">
               <h1>pax pana</h1>
               <h2>coming soon</h2>
 
               <section className="mailchimp_section">
-              <h3 id="subscription_message">
-                  {returnSubscriptionMessage()}
+
+              <h3 
+                style={{
+                  visibility: returnSubscriptionMessageStyle()
+                }}
+                id="subscription_message">
+                thank you!
               </h3>
+
               <div className="mailchimp_input">
                 <section>
                   <form 
+                    className="form_to_submit"
                     id="emailSubscribeForm"
                     onSubmit={handleSubmit}>
-
                     <input
                       onClick={handlePlaceholderNameChange}
                       onBlur={handlePlaceholderNameChange}
@@ -164,7 +173,6 @@ const handlePlaceholderNameChange = () => {
                       id="mchimpEmail" 
                       onChange={handleInputChange} 
                     />
-
                       <div>
                       <span
                         className="load-more"
@@ -175,7 +183,6 @@ const handlePlaceholderNameChange = () => {
                 </section>
               </div>
               </section>
-
           </section> 
         </section>
     </main>

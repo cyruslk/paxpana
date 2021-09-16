@@ -7,8 +7,14 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="pax pana - coming soon"
     />
+
+    <meta property="og:title" content="pax pana" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://paxpana.com/" />
+    <meta property="og:image" content="https://res.cloudinary.com/www-c-t-l-k-com/image/upload/v1628022774/ComingSoon.Desktop.Updated_sn1kwt.jpg" />
+
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -23,7 +29,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>Paxpana</title>
+    <title>pax pana</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -48,6 +54,7 @@
     function validateEmail(email) {
       const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
+
     }
 
       var page = 1,
@@ -76,7 +83,36 @@
                 });
               });
             }, 2000);
-          }
+          };
       });
+
+      $(".form_to_submit").on("keydown", function(event) {
+
+        if(event.keyCode == 13){
+
+            let mailChimpInput = document.getElementById("mchimpEmail").value;
+            let isEmail = validateEmail(mailChimpInput);
+            if(!isEmail){
+              return;
+            }
+            if ( moving == false ) {
+              moving = true;
+              $(".load-more").addClass("active");
+              setTimeout(function() {
+                $(".load-more").one(animationIteration, function() {
+                  $(".load-more").removeClass("active");
+                  $(".load-more").one(transitionEnd, function() {
+                    page++;
+                    moving = false;
+                  });
+                });
+              }, 2000);
+            };
+
+        };
+
+      });
+
+
   </script>
 </html>
